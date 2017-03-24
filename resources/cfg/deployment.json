@@ -1,0 +1,17 @@
+{
+    "glider": "REQUIRED",
+    "trajectory_date": "YYYYmmddTHHMM",
+    "global_attributes": {
+        "wmo_id": REQUIRED,
+        "deployment_number" : REQUIRED
+    },
+    "platform": {
+        "type": "platform",
+        "id": "REQUIRED",
+        "wmo_id": REQUIRED
+        "long_name": "Coastal Endurance Glider ###",
+        "comment": "",
+        "instrument": "",
+        "type": "platform"
+    }
+}
