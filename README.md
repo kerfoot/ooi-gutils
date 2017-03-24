@@ -3,7 +3,7 @@
 Python software package for creating U.S. IOOS National Glider Data Assembly Center compliant NetCDF files from OOI
 UFrame m2m NetCDF files.
 
-##Installation
+## Installation
 
     > mkvirtualenv gutils
     > workon gutils
