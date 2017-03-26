@@ -7,6 +7,36 @@ from netCDF4 import Dataset, num2date, date2num
 
 logger = logging.getLogger(os.path.basename(__file__))
 
+#M2M_REQUIRED_PARAMETERS = [u'sci_water_cond',
+#    u'deployment',
+#    u'sci_water_pracsal',
+#    u'driver_timestamp',
+#    u'sci_water_pressure_dbar',
+#    u'lon',
+#    u'internal_timestamp',
+#    u'm_present_secs_into_mission',
+#    u'm_present_time',
+#    u'ingestion_timestamp',
+#    u'port_timestamp',
+#    u'sci_water_pressure',
+#    u'sci_seawater_density',
+#    u'sci_m_present_time',
+#    u'lat',
+#    u'sci_ctd41cp_timestamp',
+#    u'sci_m_present_secs_into_mission',
+#    u'sci_water_temp',
+#    u'time']
+M2M_REQUIRED_PARAMETERS = [u'sci_water_cond',
+    u'deployment',
+    u'sci_water_pracsal',
+    u'sci_water_pressure_dbar',
+    u'lon',
+    u'sci_water_pressure',
+    u'sci_seawater_density',
+    u'lat',
+    u'sci_water_temp',
+    u'time']
+
 def m2m_nc_to_gutils_stream(nc_file):
     """Parse a NetCDF file created via a UFrame m2m asynchronous request and
     return a dictionary containing sensor metadata and the data stream.  The
@@ -34,6 +64,16 @@ def m2m_nc_to_gutils_stream(nc_file):
             obs_units.append(None)
             continue
         obs_units.append(nci.variables[v].getncattr('units'))
+        
+    # Make sure all required parameters are present
+    has_required = True
+    for v in M2M_REQUIRED_PARAMETERS:
+        if v not in obs_vars:
+            logger.warning('Missing required parameter {:s} - {:s}'.format(v, nc_file))
+            has_required = False
+            
+    if not has_required:
+        return
         
     for r in range(num_obs):
         
