@@ -336,6 +336,7 @@ def process_ooi_dataset(args):
             dataset = create_reader(nc_file, args.nctype)
             logger.info('{:s} read complete'.format(nc_file))
             if not dataset:
+                logger.warning('Skipping invalid NetCDF {:s}'.format(nc_file))
                 continue
                 
             stream = dataset['stream']
