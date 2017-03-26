@@ -282,6 +282,13 @@ def process_ooi_dataset(args):
         logger.error('Deployment configuration path does not exist {:s}'.format(cfg_path))
         return 1
         
+    # Create path to glider deployment status files
+    status_path  = os.path.join(glider_config_path, 'status')
+    logger.debug('Deployment status directory {:s}'.format(status_path))
+    if not os.path.isdir(status_path):
+        logger.error('Deployment status path does not exist {:s}'.format(status_path))
+        return 1
+        
     # Search for source NetCDF files
     nc_source_dir = os.path.join(glider_config_path, 'nc-source')
     logger.debug('Source NetCDF location {:s}'.format(nc_source_dir))
@@ -303,7 +310,7 @@ def process_ooi_dataset(args):
     )
 
     # Profile id counter
-    profile_status_file = os.path.join(cfg_path, '{:s}-profiles.json'.format(deployment_name))
+    profile_status_file = os.path.join(status_path, '{:s}-profiles.json'.format(deployment_name))
     profile_id = 1
     if os.path.isfile(profile_status_file):
         try:
