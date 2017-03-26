@@ -3,6 +3,7 @@ import os
 import json
 import logging
 import glob
+import datetime
 from netCDF4 import Dataset
 from dateutil import parser
 import numpy as np
@@ -145,9 +146,23 @@ def write_dataset_status_file(deployment_path, clobber=False,destination=None):
             
         try:
             with Dataset(nc_file, 'r') as nci:
+                profile_time = np.asscalar(nci.variables['profile_time'][-1])
+                try:
+                    profile_time_dt = datetime.datetime.utcfromtimestamp(profile_time)
+                except ValueError as e:
+                    logging.error(e)
+                    continue
+                profile_max_time = np.asscalar(np.max(nci.variables['time']))
+                try:
+                    profile_max_time_dt = datetime.datetime.utcfromtimestamp(profile_max_time)
+                except ValueError as e:
+                    logging.error(e)
+                    continue
                 profile = {'profile_id' : np.asscalar(nci.variables['profile_id'][-1]),
-                    'profile_time' : np.asscalar(nci.variables['profile_time'][-1]),
-                    'profile_max_time' : np.asscalar(np.max(nci.variables['time'])),
+                    'profile_time' : profile_time,
+                    'profile_time_str' : profile_time_dt.strftime('%Y-%m-%dT%H:%M:%S'),
+                    'profile_max_time' : profile_max_time,
+                    'profile_max_time_str' : profile_max_time_dt.strftime('%Y-%m-%dT%H:%M:%S'),
                     'filename' : nc_file}
                 profile_status.append(profile)
         except IOError as e:
