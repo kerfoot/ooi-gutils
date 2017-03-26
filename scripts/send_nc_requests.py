@@ -184,10 +184,11 @@ def main(args):
                     logging.error('Status read error {:s} ({:s})'.format(profile_status_file, e))
                     continue
                 # If there are entries in the profile_status array, get the max end time from
-                # p['profile_max_time']
+                # p['profile_max_time'] and add 1 second
                 if profile_status:
                     try:
-                        nc_end_dt = datetime.datetime.utcfromtimestamp(max([p['profile_max_time'] for p in profile_status])).replace(tzinfo=pytz.UTC)
+                        profile_max_times = [p['profile_max_time'] for p in profile_status]
+                        nc_end_dt = datetime.datetime.utcfromtimestamp(max(profile_max_times)).replace(tzinfo=pytz.UTC) + datetime.timedelta(seconds=1)
                     except ValueError as e:
                         logging.error('Error parsing max_profile_time {:s}'.format(profile_status_file))
                         
