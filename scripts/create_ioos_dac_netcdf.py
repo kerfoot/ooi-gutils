@@ -170,14 +170,13 @@ def create_arg_parser():
     )
 
     parser.add_argument(
-        'glider_config_path',
+        'glider_deployment_path',
         help='Path to glider deployment configuration information'
     )
 
     parser.add_argument(
         'output_path',
-        help='Written NetCDF file parent directory. A directory named after '
-             'the deployment will be created here.  <Default=glider_config_path>',
+        help='Written NetCDF file parent directory. A directory named after the deployment will be created here <Default=glider_deployment_path>.',
         nargs='?'
     )
     
@@ -269,28 +268,28 @@ def read_attrs(glider_config_path):
 
 def process_ooi_dataset(args):
 
-    glider_config_path = args.glider_config_path
-    logger.debug('Deployment directory {:s}'.format(glider_config_path))
-    if not os.path.isdir(glider_config_path):
-        logger.error('Invalid deployment location {:s}'.format(args.glider_config_path))
+    glider_deployment_path = args.glider_deployment_path
+    logger.debug('Deployment directory {:s}'.format(glider_deployment_path))
+    if not os.path.isdir(glider_deployment_path):
+        logger.error('Invalid deployment location {:s}'.format(args.glider_deployment_path))
         return 1
         
     # Create path to glider deployment configuration files
-    cfg_path = os.path.join(glider_config_path, 'cfg')
+    cfg_path = os.path.join(glider_deployment_path, 'cfg')
     logger.debug('Deployment configuration directory {:s}'.format(cfg_path))
     if not os.path.isdir(cfg_path):
         logger.error('Deployment configuration path does not exist {:s}'.format(cfg_path))
         return 1
         
     # Create path to glider deployment status files
-    status_path  = os.path.join(glider_config_path, 'status')
+    status_path  = os.path.join(glider_deployment_path, 'status')
     logger.debug('Deployment status directory {:s}'.format(status_path))
     if not os.path.isdir(status_path):
         logger.error('Deployment status path does not exist {:s}'.format(status_path))
         return 1
         
     # Search for source NetCDF files
-    nc_source_dir = os.path.join(glider_config_path, 'nc-source')
+    nc_source_dir = os.path.join(glider_deployment_path, 'nc-source')
     logger.debug('Source NetCDF location {:s}'.format(nc_source_dir))
     if not os.path.isdir(nc_source_dir):
         logger.error('Invalid source NetCDF directory {:s}'.format(nc_source_dir))
@@ -470,7 +469,7 @@ def main():
     
     # Check args
     if not args.output_path:
-        args.output_path = args.glider_config_path
+        args.output_path = args.glider_deployment_path
 
     return process_ooi_dataset(args)
 
