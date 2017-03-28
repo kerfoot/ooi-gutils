@@ -1,0 +1,67 @@
+[
+    {
+        "platform": "CE05MOAS-GL326", 
+        "poc": {
+            "email": "spearce@coas.oregonstate.edu", 
+            "address": "126 SW McKenzie Avenue, Corvallis, OR, 97333", 
+            "name": "Stuart Pearce", 
+            "phone": "541-737-0011", 
+            "institution": "Oregon State University"
+        }, 
+        "glider": "ce_326", 
+        "wmo_id": 4801952,
+        "assigned_date" : "2017-03-21"
+    },
+    {
+        "platform": "CP05MOAS-GL335", 
+        "poc": {
+            "email": "pbrickley@whoi.edu",
+            "address": "LOSOS Building/WHOI Quissett Campus, 360-14 Woods Hole Road, #212, Woods Hole, MA 02543",
+            "name": "Peter Brickley", 
+            "phone": "508 289 3897",
+            "institution": "Woods Hole Oceanographic Institution"
+        }, 
+        "glider": "cp_335", 
+        "wmo_id": 4801954,
+        "assigned_date" : "2017-03-24"
+    },
+    {
+        "platform": "CP05MOAS-GL336", 
+        "poc": {
+            "email": "pbrickley@whoi.edu",
+            "address": "LOSOS Building/WHOI Quissett Campus, 360-14 Woods Hole Road, #212, Woods Hole, MA 02543",
+            "name": "Peter Brickley", 
+            "phone": "508 289 3897",
+            "institution": "Woods Hole Oceanographic Institution"
+        }, 
+        "glider": "cp_336", 
+        "wmo_id": 4801955,
+        "assigned_date" : "2017-03-24"
+    },
+    {
+        "platform": "CP05MOAS-GL388", 
+        "poc": {
+            "email": "pbrickley@whoi.edu",
+            "address": "LOSOS Building/WHOI Quissett Campus, 360-14 Woods Hole Road, #212, Woods Hole, MA 02543",
+            "name": "Peter Brickley", 
+            "phone": "508 289 3897",
+            "institution": "Woods Hole Oceanographic Institution"
+        }, 
+        "glider": "cp_388", 
+        "wmo_id": 4801956,
+        "assigned_date" : "2017-03-24"
+    },
+    {
+        "platform": "CP05MOAS-GL339", 
+        "poc": {
+            "email": "pbrickley@whoi.edu",
+            "address": "LOSOS Building/WHOI Quissett Campus, 360-14 Woods Hole Road, #212, Woods Hole, MA 02543",
+            "name": "Peter Brickley", 
+            "phone": "508 289 3897",
+            "institution": "Woods Hole Oceanographic Institution"
+        }, 
+        "glider": "cp_339", 
+        "wmo_id": 4801957,
+        "assigned_date" : "2017-03-24"
+    }
+]
