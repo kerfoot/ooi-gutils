@@ -253,7 +253,7 @@ def main(args):
                     
                 # Calculate the delta between end_date and start_date
                 delta_date = end_date - start_date
-                if delta_date.seconds <= MIN_DATASET_UPDATE_SECONDS:
+                if delta_date.total_seconds() <= MIN_DATASET_UPDATE_SECONDS:
                     logging.info('No UFrame updates to {:s}-{:s}-{:s}'.format(i, stream_info['stream'], stream_info['method']))
                     continue
                     
