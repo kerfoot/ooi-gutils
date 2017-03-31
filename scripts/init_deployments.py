@@ -22,6 +22,7 @@ def main(args):
     
     # Deployments home directory
     deployments_root = args.root or os.getenv('OOI_GLIDER_DAC_HOME')
+    logging.info('Deployments root {:s}'.format(deployments_root))
     if not deployments_root:
         logging.error('No deployments root specified (OOI_GLIDER_DAC_HOME not set?)')
         return 1
@@ -29,17 +30,21 @@ def main(args):
         logging.error('Invalid deployments root {:s}'.format(deployments_root))
         return 1
     # Master configuration directory
-    master_cfg_dir = os.path.join(deployments_root, 'resources', 'deployment-master')
+    script_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+    master_cfg_dir = os.path.join(script_dir, 'resources', 'deployment-master')
+    logging.info('Master configuration dir {:s}'.format(master_cfg_dir))
     if not os.path.isdir(master_cfg_dir):
         logging.error('Invalid master configuration directory {:s}'.format(master_cfg_dir))
         return 1
     # Deployment directories home
     deployments_home = os.path.join(deployments_root, 'deployments')
+    logging.info('Deployments home {:s}'.format(deployments_home))
     if not os.path.isdir(deployments_home):
         logging.error('Invalid deployments home {:s}'.format(deployments_home))
         return 1
     # Array specific attributes directory
-    array_attrs_dir = os.path.join(deployments_root, 'resources', 'arrays')
+    array_attrs_dir = os.path.join(script_dir, 'resources', 'arrays')
+    logging.info('Array-specific attributes dir {:s}'.format(array_attrs_dir))
         
     # UFrame instance
     uframe_base_url = args.base_url or os.getenv('UFRAME_BASE_URL')
