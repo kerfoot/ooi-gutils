@@ -128,7 +128,7 @@ class GliderNetCDFWriter(object):
         # does not append Z at end of string
         now_time = datetime.utcnow()
         time_string = now_time.strftime("%Y-%m-%dT%H:%M:%SZ")
-        history_string = "%s: %s\r\n" % (time_string, sys.argv[0])
+        history_string = "%s: %s\n" % (time_string, os.path.realpath(sys.argv[0]))
 
         if 'history' not in self.nc.ncattrs():
             self.nc.setncattr("history", history_string)
@@ -344,6 +344,16 @@ class GliderNetCDFWriter(object):
             })
             for key, value in sorted(status_flag['attrs'].items()):
                 status_flag_var.setncattr(key, value)
+        
+    def perform_qaqc(self, key, value):
+        if key in self.qaqc_methods:
+            flag = self.qaqc_methods[key](value)
+        elif value == NC_FILL_VALUES['f8']:
+            flag = GLIDER_QC["missing_value"]
+        else:
+            flag = GLIDER_QC['no_qc_performed']
+
+        return flag
         
     def set_scalar(self, key, value=None):
         datatype = self.check_datatype_exists(key)
