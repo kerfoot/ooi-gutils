@@ -30,6 +30,11 @@ from gutils.nc import open_glider_netcdf, GLIDER_UV_DATATYPE_KEYS
 from gutils.readers.nc import *
 from gutils.readers import stream_to_yo, stream_to_profiles
 
+REQUIRED_CFG_FILES = ['datatypes.json',
+    'global_attributes.json',
+    'deployment.json',
+    'instruments.json']
+    
 import logging
 logger = logging.getLogger('gutils.nc')
 
@@ -280,6 +285,16 @@ def process_ooi_dataset(args):
     if not os.path.isdir(cfg_path):
         logger.error('Deployment configuration path does not exist {:s}'.format(cfg_path))
         return 1
+    # Make sure required config file exist
+    cfg_status = True
+    for f in REQUIRED_CFG_FILES:
+        cfg_file = os.path.join(cfg_path, f)
+        if not os.path.isfile(cfg_file):
+            logger.error('Missing required config file {:s}'.format(cfg_file))
+            cfg_status = False
+    if not cfg_status:
+        return 1
+    
         
     # Create path to glider deployment status files
     status_path  = os.path.join(glider_deployment_path, 'status')
@@ -328,6 +343,10 @@ def process_ooi_dataset(args):
     
     # Process each input NetCDF file
     for nc_file in nc_files:
+        
+        # Create the NC_GLOBAL:history with the name of the source UFrame NetCDF file
+        history = '{:s}: Data Source {:s}'.format(datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'), nc_file)
+        attrs['global']['history'] = '{:s}\n'.format(history)
         
         try:
            
