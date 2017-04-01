@@ -35,7 +35,12 @@ def main(args):
     # Process each response separately
     for response in responses:
         # Create the destination directory
-        download_path = os.path.join(response['path'], 'nc-source')
+        try:
+            download_path = os.path.join(response['path'], 'nc-source')
+        except KeyError as e:
+            logging.error('Invalid response file {:s} ({:s})'.format(args.response_file, e))
+            continue
+            
         if not os.path.isdir(download_path):
             logging.warning('Invalid NetCDF destination {:s} in response [{:0.0f}]'.format(download_path, response_count))
             exit_status = 1
@@ -45,11 +50,14 @@ def main(args):
         nc_urls = parse_response_nc_urls(response, timeout=args.timeout)
         if not nc_urls:
             continue
-            
         
         for url in nc_urls:
-            #if args.status:
-            #    status_file = '{:s}/status.txt'.format(os.path.basename(url))
+            # If args.debug is True display the URL but do not download it
+            if args.debug:
+                sys.stdout.write('NetCDF URL: {:s}\n'.format(url))
+                continue
+                
+            # Download the file
             nc_path = download_nc(url, download_path=download_path, timeout=30)
             if not nc_path:
                 exit_status = 1
@@ -81,9 +89,9 @@ if __name__ == '__main__':
     #args_parser.add_argument('-s', '--status',
     #    help='Check on the status of the request but do not download NetCDF files',
     #    action='store_true')
-    #arg_parser.add_argument('-x', '--debug',
-    #    help='Print new deployments but do not perform any intitialization',
-    #    action='store_true')
+    arg_parser.add_argument('-x', '--debug',
+        help='Print file URLs but do not download them',
+        action='store_true')
     arg_parser.add_argument('-t', '--timeout',
         type=int,
         default=30,
