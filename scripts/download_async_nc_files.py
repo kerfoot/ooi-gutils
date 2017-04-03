@@ -54,7 +54,7 @@ def main(args):
         for url in nc_urls:
             # If args.debug is True display the URL but do not download it
             if args.debug:
-                sys.stdout.write('NetCDF URL: {:s}\n'.format(url))
+                sys.stdout.write('DEBUG MODE: Skipping download of NetCDF URL: {:s}\n'.format(url))
                 continue
                 
             # Download the file
