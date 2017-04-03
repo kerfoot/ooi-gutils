@@ -28,7 +28,7 @@ logger = logging.getLogger(os.path.basename(__file__))
 #    u'time']
 M2M_REQUIRED_PARAMETERS = [u'sci_water_cond',
     u'deployment',
-    u'sci_water_pracsal',
+    u'practical_salinity',
     u'sci_water_pressure_dbar',
     u'lon',
     u'sci_water_pressure',
