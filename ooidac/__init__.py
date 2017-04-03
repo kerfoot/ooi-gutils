@@ -158,12 +158,29 @@ def write_dataset_status_file(deployment_path, clobber=False,destination=None):
                 except ValueError as e:
                     logging.error(e)
                     continue
+                    
+                # Create the depth time-series, store the min depth, max depth and
+                # number of non-Nan records
+                yo = np.column_stack((nci.variables['time'], nci.variables['depth']))
+                yo = yo[np.all(~np.isnan(yo),axis=1)]
+                num_records = len(yo)
+                if num_records == 0:
+                    logger.warning('Profile has 0 non-NaN time/depth records {:s}'.format(nc_file))
+                    min_depth = None
+                    max_depth = None
+                else:
+                    min_depth = np.min(yo[:,1])
+                    max_depth = np.max(yo[:,1])
+                    
                 profile = {'profile_id' : np.asscalar(nci.variables['profile_id'][-1]),
                     'profile_time' : profile_time,
                     'profile_time_str' : profile_time_dt.strftime('%Y-%m-%dT%H:%M:%S'),
                     'profile_max_time' : profile_max_time,
                     'profile_max_time_str' : profile_max_time_dt.strftime('%Y-%m-%dT%H:%M:%S'),
-                    'filename' : nc_file}
+                    'filename' : nc_file,
+                    'min_depth' : min_depth,
+                    'max_depth' : max_depth,
+                    'num_records' : num_records}
                 profile_status.append(profile)
         except IOError as e:
             logger.error('Erroring reading {:s} ({:s})'.format(nc_file, e))
