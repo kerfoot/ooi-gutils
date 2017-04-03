@@ -9,7 +9,7 @@ DBA_TIMESENSORS = ['m_present_time',
     'sci_m_present_time',
     'sci_ctd41cp_timestamp']
     
-def bd_to_stream(dbd, timesensor=None):
+def dba_to_stream(dbd, timesensor=None):
     """Parse a Slocum glider ascii dba file and return a dictionary containing 
     the dbd file metadata and the data stream.  The
     data stream is an array in which each element is a dictionary mapping the 
