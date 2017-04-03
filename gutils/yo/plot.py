@@ -14,6 +14,8 @@ def plot_yo(yo, profile_times):
         pro = yo[np.logical_and(yo[:,0] >= p[0], yo[:,0] <= p[1])]
         
         pro = pro[np.all(~np.isnan(pro),axis=1)]
+
         plt.plot(pro[:,0], -pro[:,1])
         
     plt.show()
+
