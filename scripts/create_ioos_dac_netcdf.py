@@ -76,47 +76,6 @@ def find_profiles(stream, timesensor='timestamp', depthsensor='sci_water_pressur
 
     return profile_times
 
-#def get_file_set_gps(flight_path, science_path, time_name, gps_prefix):
-#    gps_values = []
-#    reader = create_reader(flight_path, science_path)
-#    lat_name = gps_prefix + 'lat-lat'
-#    lon_name = gps_prefix + 'lon-lon'
-#    for line in reader:
-#        if lat_name in line:
-#            gps_values.append(
-#                [line[time_name], line[lat_name], line[lon_name]]
-#            )
-#        else:
-#            gps_values.append([line[time_name], np.nan, np.nan])
-#
-#    if not gps_values:
-#        raise ValueError('Not enough gps posistions found')
-#
-#    try:
-#        gps_values = np.array(gps_values)
-#        timestamps = gps_values[:, 0]
-#        latitudes = gps_values[:, 1]
-#        longitudes = gps_values[:, 2]
-#    except IndexError:
-#        raise ValueError('Not enough timestamps, latitudes, or longitudes found')
-#    else:
-#        gps_values[:, 1], gps_values[:, 2] = interpolate_gps(
-#            timestamps, latitudes, longitudes
-#        )
-#
-#    return gps_values
-#
-#
-#def fill_gps(line, interp_gps, time_name, gps_prefix):
-#    lat_name = gps_prefix + 'lat-lat'
-#    lon_name = gps_prefix + 'lon-lon'
-#    if lat_name not in line:
-#        timestamp = line[time_name]
-#        line[lat_name] = interp_gps[interp_gps[:, 0] == timestamp, 1][0]
-#        line[lon_name] = interp_gps[interp_gps[:, 0] == timestamp, 2][0]
-#
-#    return line
-
 
 def init_netcdf(file_path, config_path, attrs, profile_id):
     with open_glider_netcdf(file_path, config_path, mode='w') as glider_nc:
@@ -140,17 +99,7 @@ def init_netcdf(file_path, config_path, attrs, profile_id):
 
         # Set Profile ID
         glider_nc.set_profile_id(profile_id)
-
-
-#def find_segment_id(flight_path, science_path):
-#    if flight_path is None:
-#        filename = science_path
-#    else:
-#        filename = flight_path
-#
-#    details = parse_glider_filename(filename)
-#    return details['segment']
-
+        
 
 def fill_uv_variables(dst_glider_nc, uv_values):
     for key, value in uv_values.items():
@@ -185,6 +134,10 @@ def create_arg_parser():
         nargs='?'
     )
     
+    parser.add_argument('-c', '--clobber',
+        help='Overwrite existing NetCDF file, if present',
+        action='store_true')
+        
     parser.add_argument('--timestamping',
         help='Timestamp log entries',
         action='store_true')
@@ -326,6 +279,7 @@ def process_ooi_dataset(args):
     # Profile id counter
     profile_status_file = os.path.join(status_path, '{:s}-profiles.json'.format(deployment_name))
     profile_id = 1
+    existing_nc = []
     if os.path.isfile(profile_status_file):
         try:
             with open(profile_status_file, 'r') as fid:
@@ -338,8 +292,8 @@ def process_ooi_dataset(args):
         if profile_status:
             # Find the max profile_id and increment it by one
             profile_id = max([p['profile_id'] for p in profile_status]) + 1
-            
-    #profile_id = args.profilestart
+            # Create a list NetCDF files that have previously been created
+            existing_nc = {os.path.basename(p['filename']):p['filename'] for p in profile_status}
     
     # Process each input NetCDF file
     for nc_file in nc_files:
@@ -402,7 +356,24 @@ def process_ooi_dataset(args):
                 begin_time.strftime("%Y%m%dT%H%M%SZ"),
                 args.mode
             )
+            
+            # Skip this write operation if the args.clobber is False and the file has
+            # been previously written
+            if not args.clobber:
+                if filename in existing_nc:
+                    logging.warning('Skipping (Profile NetCDF already exists: {:s}'.format(filename))
+                    continue
+            elif args.clobber:
+                # If arg.clobber is True, try to delete the existing file provided
+                # we can find it
+                if os.path.isfile(existing_nc[filename]):
+                    logging.info('Clobbering existing NetCDF: {:s}'.format(existing_nc[filename]))
+                    try:
+                        os.remove(p[filename])
+                    except OSError as e:
+                        logging.warning('Failed to delete existing file: {:s} ({:s})'.format(existing_nc[filename], e))
 
+            # Full path to the file to be written
             file_path = os.path.join(
                 args.output_path,
                 deployment_name,
