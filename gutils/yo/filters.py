@@ -19,6 +19,42 @@ def default_profiles_filter(yo, profile_times):
     
     return profile_times
     
+def filter_profile_breaks(yo, profile_times):
+    
+    filt_p_times = np.empty((0,2))
+
+    for p in profile_times:
+    
+        # Create the profile by finding all timestamps in yo that are included in the
+        # window p
+        pro = yo[np.logical_and(yo[:,0] >= p[0], yo[:,0] <= p[1])]
+        
+        pro = pro[np.all(~np.isnan(pro),axis=1)]
+        
+        # Diff the timestamps
+        tdiff = np.diff(pro[:,0])
+        # Median and stdev
+        med = np.median(tdiff)
+        std = np.std(tdiff)
+        
+        # Find profile time breaks
+        p_breaks = np.where(tdiff > med+std)
+        if not len(p_breaks):
+            filt_p_times = np.append(filt_p_times, p)
+            continue
+            
+        p0 = np.append(np.array(0), p_breaks[0].copy())
+        p1 = np.append(p_breaks[0].copy()+1, pro.shape[0]-1)
+        p_inds = np.column_stack((p0, p1))
+        
+        for i in p_inds:
+            t0 = pro[i[0],0]
+            t1 = pro[i[1],0]
+            filt_p_times = np.append(filt_p_times, [[t0, t1]], axis=0)
+            
+    return filt_p_times
+        
+    
 def filter_profiles_min_points(yo, profile_times, minpoints=3):
     """Returns profile start/stop times for which the indexed profile contains
     at least minpoints number of non-Nan points.
