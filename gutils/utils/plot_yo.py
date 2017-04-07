@@ -35,7 +35,7 @@ def main(args):
         
     # Create the depth timeseries to index profiles
     yo = stream_to_yo(dataset['stream'], args.depth, timesensor=args.time)
-    if not len(yo) == 0:
+    if len(yo) == 0:
         logging.warning('No depth/pressure time-series (yo) created {:s}'.format(args.filename))
         return 1
         
