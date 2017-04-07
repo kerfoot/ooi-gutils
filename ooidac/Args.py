@@ -18,7 +18,17 @@ class Args(object):
         self._password = '1ioo$man9'
         self._host = 'data.ioos.us'
         self._deployment_nc_path = None
-       
+        self._timestamping = True
+        
+    @property
+    def timestamping(self):
+        return self._timestamping
+    @timestamping.setter
+    def timestamping(self, bool):
+        if type(bool) != bool:
+           return
+        self._timestamps = bool
+        
     @property
     def deployment_nc_path(self):
         return self._deployment_nc_path
