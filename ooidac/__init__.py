@@ -143,7 +143,9 @@ def write_dataset_status_file(deployment_path, clobber=False,destination=None):
             continue
         if os.path.basename(nc_file) in seen_nc_files:
             continue
-            
+   
+        logging.debug('Adding new file {:s}'.format(nc_file))
+
         try:
             with Dataset(nc_file, 'r') as nci:
                 profile_time = np.asscalar(nci.variables['profile_time'][-1])
