@@ -1,7 +1,7 @@
 {
     "Conventions": "CF-1.6", 
     "Metadata_Conventions": "CF-1.6, Unidata Dataset Discovery v1.0", 
-    "acknowledgement": "Funding provided by the National Science Foundation.  Glider deployed by Woods Hole Oceanographic Institution",
+    "acknowledgment": "Funding provided by the National Science Foundation.  Glider deployed by Woods Hole Oceanographic Institution",
     "cdm_data_type": "Trajectory", 
     "comment": "", 
     "contributor_name": "Paul Matthias,Peter Brickley,Sheri White,Diana Wickman,John Kerfoot", 

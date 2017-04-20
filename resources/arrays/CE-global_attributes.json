@@ -1,7 +1,7 @@
 {
     "Conventions": "CF-1.6", 
     "Metadata_Conventions": "CF-1.6, Unidata Dataset Discovery v1.0", 
-    "acknowledgement": "Funding provided by the National Science Foundation.  Glider deployed by Oregon State University", 
+    "acknowledgment": "Funding provided by the National Science Foundation.  Glider deployed by Oregon State University", 
     "cdm_data_type": "Trajectory", 
     "comment": "", 
     "contributor_name": "Ed Dever,Jon Fram,Stuart Pearce,John Kerfoot", 
