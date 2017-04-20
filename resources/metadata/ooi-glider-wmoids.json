@@ -63,5 +63,109 @@
         "glider": "cp_339", 
         "wmo_id": 4801957,
         "assigned_date" : "2017-03-24"
+    },
+    {
+        "platform": "CE05MOAS-GL383", 
+        "poc": {
+            "email": "spearce@coas.oregonstate.edu", 
+            "address": "126 SW McKenzie Avenue, Corvallis, OR, 97333", 
+            "name": "Stuart Pearce", 
+            "phone": "541-737-0011", 
+            "institution": "Oregon State University"
+        }, 
+        "glider": "cp_383", 
+        "wmo_id": 4801961,
+        "assigned_date" : "2017-04-20"
+    },
+    {
+        "platform": "CE05MOAS-GL381", 
+        "poc": {
+            "email": "spearce@coas.oregonstate.edu", 
+            "address": "126 SW McKenzie Avenue, Corvallis, OR, 97333", 
+            "name": "Stuart Pearce", 
+            "phone": "541-737-0011", 
+            "institution": "Oregon State University"
+        }, 
+        "glider": "cp_381", 
+        "wmo_id": 4801960,
+        "assigned_date" : "2017-04-20"
+    },
+    {
+        "platform": "CE05MOAS-GL382", 
+        "poc": {
+            "email": "spearce@coas.oregonstate.edu", 
+            "address": "126 SW McKenzie Avenue, Corvallis, OR, 97333", 
+            "name": "Stuart Pearce", 
+            "phone": "541-737-0011", 
+            "institution": "Oregon State University"
+        }, 
+        "glider": "cp_382", 
+        "wmo_id": 4801967,
+        "assigned_date" : "2017-04-20"
+    },
+    {
+        "platform": "CE05MOAS-GL247", 
+        "poc": {
+            "email": "spearce@coas.oregonstate.edu", 
+            "address": "126 SW McKenzie Avenue, Corvallis, OR, 97333", 
+            "name": "Stuart Pearce", 
+            "phone": "541-737-0011", 
+            "institution": "Oregon State University"
+        }, 
+        "glider": "cp_247", 
+        "wmo_id": 4801962,
+        "assigned_date" : "2017-04-20"
+    },
+    {
+        "platform": "CE05MOAS-GL311", 
+        "poc": {
+            "email": "spearce@coas.oregonstate.edu", 
+            "address": "126 SW McKenzie Avenue, Corvallis, OR, 97333", 
+            "name": "Stuart Pearce", 
+            "phone": "541-737-0011", 
+            "institution": "Oregon State University"
+        }, 
+        "glider": "cp_311", 
+        "wmo_id": 4801963,
+        "assigned_date" : "2017-04-20"
+    },
+    {
+        "platform": "CE05MOAS-GL312", 
+        "poc": {
+            "email": "spearce@coas.oregonstate.edu", 
+            "address": "126 SW McKenzie Avenue, Corvallis, OR, 97333", 
+            "name": "Stuart Pearce", 
+            "phone": "541-737-0011", 
+            "institution": "Oregon State University"
+        }, 
+        "glider": "cp_312", 
+        "wmo_id": 4801964,
+        "assigned_date" : "2017-04-20"
+    },
+    {
+        "platform": "CE05MOAS-GL319", 
+        "poc": {
+            "email": "spearce@coas.oregonstate.edu", 
+            "address": "126 SW McKenzie Avenue, Corvallis, OR, 97333", 
+            "name": "Stuart Pearce", 
+            "phone": "541-737-0011", 
+            "institution": "Oregon State University"
+        }, 
+        "glider": "cp_319", 
+        "wmo_id": 4801965,
+        "assigned_date" : "2017-04-20"
+    },
+    {
+        "platform": "CE05MOAS-GL320", 
+        "poc": {
+            "email": "spearce@coas.oregonstate.edu", 
+            "address": "126 SW McKenzie Avenue, Corvallis, OR, 97333", 
+            "name": "Stuart Pearce", 
+            "phone": "541-737-0011", 
+            "institution": "Oregon State University"
+        }, 
+        "glider": "cp_320", 
+        "wmo_id": 4801966,
+        "assigned_date" : "2017-04-20"
     }
 ]
