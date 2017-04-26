@@ -106,13 +106,33 @@ def main(args):
             nc_archive_dir = os.path.join(deployment_path, 'nc-archive')
             deployment_status_dir = os.path.join(deployment_path, 'status')
             
+            # Skip this deployment if the recovered.txt file is present
+            if os.path.isfile(os.path.join(cfg_dir, 'recovered.txt')):
+                logging.info('Skipping deployment: {:s} has been recovered'.format(deployment_dir))
+                continue
+                
             # Create trajectory name
             deployment_json_file = os.path.join(cfg_dir, 'deployment.json')
             if not os.path.isfile(deployment_json_file):
                 logging.warning('Deployment configuration does not exist {:s}'.format(deployment_json_file))
                 continue
                 
-            trajectory = build_trajectory_name(deployment_json_file)
+            # Read deployment_json_file
+            try:
+                with open(deployment_json_file, 'r') as fid:
+                    deployment_cfg = json.load(fid)
+            except (OSError, ValueError) as e:
+                logging.error('Error reading deployment config file: {:s} ({:s})'.format(deployment_json_file, e))
+                continue
+                
+            if 'glider' not in deployment_cfg:
+                logging.error('Missing glider in deployment configuration: {:s}'.format(deployment_json_file))
+                return 1
+            if 'trajectory_date' not in deployment_cfg:
+                logging.error('Missing trajectory_date in deployment_configuration: {:s}'.format(deployment_json_file))
+                return 1
+        
+            trajectory = build_trajectory_name(deployment_cfg['glider'], deployment_cfg['trajectory_date'])
             if not trajectory:
                 logging.error('Error creating trajectory identifier {:s}'.format(deployment_json_file))
                 continue

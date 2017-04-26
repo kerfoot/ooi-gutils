@@ -29,6 +29,7 @@ from gutils.nc import open_glider_netcdf, GLIDER_UV_DATATYPE_KEYS
 
 from gutils.readers.nc import *
 from gutils.readers import stream_to_yo, stream_to_profiles
+from ooidac import build_trajectory_name
 
 REQUIRED_CFG_FILES = ['datatypes.json',
     'global_attributes.json',
@@ -271,7 +272,7 @@ def process_ooi_dataset(args):
     attrs = read_attrs(cfg_path)
 
     glider_name = attrs['deployment']['glider']
-    deployment_name = '{}-{}'.format(
+    deployment_name = build_trajectory_name(
         glider_name,
         attrs['deployment']['trajectory_date']
     )

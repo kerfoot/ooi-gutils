@@ -50,35 +50,17 @@ GLIDER_INSTRUMENT_STREAMS = {
 }
 
     
-def build_trajectory_name(json_file):
-
-    if not os.path.isfile(json_file):
-        logger.error('Deployment JSON file does not exist {:s}'.format(json_file))
-        return
+def build_trajectory_name(glider, deployment_date):
 
     try:
-        with open(json_file, 'r') as fid:
-            deployment_info = json.load(fid)
-    except (OSError, ValueError) as e:
-        logger.error('Error opening {:s} ({:s})'.format(json_file, e))
-        return
-
-    if 'glider' not in deployment_info:
-        logger.warning('glider missing from deployment info {:s}'.format(json_file))
-        return
-    elif 'trajectory_date' not in deployment_info:
-        logger.warning('trajectory_date missing from deployment info {:s}'.format(json_file))
-        return
-
-    try:
-        dt = parser.parse(deployment_info['trajectory_date'])
+        dt = parser.parse(deployment_date)
     except ValueError as e:
-        logger.error('Error creating trajectory {:s}'.format(json_file))
+        logger.error('Error parsing deployment date: {:s} ({:s})'.format(deployment_date, e))
         return
 
-    return '{:s}-{:s}'.format(deployment_info['glider'], dt.strftime('%Y%m%dT%H%M'))
+    return '{:s}-{:s}'.format(glider, dt.strftime('%Y%m%dT%H%M%S'))
 
-def write_dataset_status_file(deployment_path, clobber=False,destination=None):
+def write_dataset_status_file(deployment_path, clobber=False, destination=None):
     
     if not os.path.isdir(deployment_path):
         logger.error('Invalid deployment path {:s}'.format(deployment_path))
@@ -107,7 +89,14 @@ def write_dataset_status_file(deployment_path, clobber=False,destination=None):
         logger.error('Error reading deployment configuration {:s} ({:s})'.format(deployment_cfg, e))
         return
         
-    trajectory = build_trajectory_name(deployment_cfg)
+    if 'glider' not in cfg:
+        logger.error('Missing glider in deployment configuration: {:s}'.format(deployment_cfg))
+        return 1
+    if 'trajectory_date' not in cfg:
+        logger.error('Missing trajectory_date in deployment_configuration: {:s}'.format(deployment_cfg))
+        return 1
+        
+    trajectory = build_trajectory_name(cfg['glider'], cfg['trajectory_date'])
     if not trajectory:
         return
         

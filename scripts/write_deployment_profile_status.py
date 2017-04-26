@@ -20,6 +20,10 @@ def main(args):
         logging.error('Invalid deployment directory specified {:s}'.format(args.glider_deployment_path))
         return 1
         
+    if os.path.isfile(os.path.join(args.glider_deployment_path, 'cfg', 'recovered.txt')):
+        logging.info('Skipping deployment: {:s} has been recovered'.format(args.glider_deployment_path))
+        return 0
+        
     profile_status_file = write_dataset_status_file(args.glider_deployment_path, clobber=args.clobber)
     
     if not profile_status_file:
