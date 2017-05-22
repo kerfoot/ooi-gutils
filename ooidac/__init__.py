@@ -7,6 +7,7 @@ import datetime
 from netCDF4 import Dataset
 from dateutil import parser
 import numpy as np
+from gutils.ndbc import check_gts_bin_count
 
 logger = logging.getLogger(os.path.basename(__file__))
 
@@ -171,7 +172,8 @@ def write_dataset_status_file(deployment_path, clobber=False, destination=None):
                     'filename' : nc_file,
                     'min_depth' : min_depth,
                     'max_depth' : max_depth,
-                    'num_records' : num_records}
+                    'num_records' : num_records,
+                    'ndbc_status' : check_gts_bin_count(max_depth, num_records)}
                 profile_status.append(profile)
         except IOError as e:
             logger.error('Erroring reading {:s} ({:s})'.format(nc_file, e))
