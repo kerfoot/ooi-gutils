@@ -5,6 +5,7 @@ import logging
 import argparse
 import sys
 from ooidac import write_dataset_status_file
+from gutils.ndbc import check_gts_bin_count
 
 def main(args):
     """Write the profile status file summarizing all DAC NetCDF files written for
