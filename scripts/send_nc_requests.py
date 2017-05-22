@@ -29,7 +29,7 @@ def main(args):
     
     exit_status = 0
     
-    # Set up the erddapfoo.lib.m2m.M2mClient logger
+    # Set up the logger
     log_level = getattr(logging, args.loglevel.upper())
     log_format = '%(module)s:%(funcName)s:[line %(lineno)d]:%(levelname)s:%(message)s'
     logging.basicConfig(format=log_format, level=log_level)
