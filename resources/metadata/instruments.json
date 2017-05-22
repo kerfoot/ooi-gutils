@@ -58,9 +58,9 @@
             "make_model": "Sea-Bird GPCTD",
             "comment": "Slocum Glider cp_339",
             "long_name": "Pumped Conductivity, Temperature, Depth (CTD) Sensor",
-            "calibration_date": "",
+            "calibration_date": "2016-04-06",
             "user_calibrated": "",
-            "factory_calibrated": "",
+            "factory_calibrated": "2016-04-06",
             "calibration_report": "",
             "type": "instrument",
             "platform": "platform",
@@ -82,6 +82,142 @@
             "type": "instrument",
             "platform": "platform",
             "deployment" : 5
+        }
+    },
+    {
+        "name": "instrument_ctd",
+        "type": "i4",
+        "attrs": {
+            "serial_number": "9307",
+            "make_model": "Sea-Bird GPCTD",
+            "comment": "Slocum Glider cp_583",
+            "long_name": "Pumped Conductivity, Temperature, Depth (CTD) Sensor",
+            "calibration_date": "2015-10-11",
+            "user_calibrated": "",
+            "factory_calibrated": "2015-10-11",
+            "calibration_report": "",
+            "type": "instrument",
+            "platform": "platform",
+            "deployment" : "?"
+        }
+    },
+    {
+        "name": "instrument_ctd",
+        "type": "i4",
+        "attrs": {
+            "serial_number": "9286",
+            "make_model": "Sea-Bird GPCTD",
+            "comment": "Slocum Glider cp_564",
+            "long_name": "Pumped Conductivity, Temperature, Depth (CTD) Sensor",
+            "calibration_date": "2015-02-26",
+            "user_calibrated": "",
+            "factory_calibrated": "2015-02-26",
+            "calibration_report": "",
+            "type": "instrument",
+            "platform": "platform",
+            "deployment" : "?"
+        }
+    },
+    {
+        "name": "instrument_ctd",
+        "type": "i4",
+        "attrs": {
+            "serial_number": "9029",
+            "make_model": "Sea-Bird GPCTD",
+            "comment": "Slocum Glider cp_389",
+            "long_name": "Pumped Conductivity, Temperature, Depth (CTD) Sensor",
+            "calibration_date": "2016-04-29",
+            "user_calibrated": "",
+            "factory_calibrated": "2016-04-29",
+            "calibration_report": "",
+            "type": "instrument",
+            "platform": "platform",
+            "deployment" : 4
+        }
+    },
+    {
+        "name": "instrument_ctd",
+        "type": "i4",
+        "attrs": {
+            "serial_number": "9089",
+            "make_model": "Sea-Bird GPCTD",
+            "comment": "Slocum Glider cp_387",
+            "long_name": "Pumped Conductivity, Temperature, Depth (CTD) Sensor",
+            "calibration_date": "2016-09-29",
+            "user_calibrated": "",
+            "factory_calibrated": "2016-09-29",
+            "calibration_report": "",
+            "type": "instrument",
+            "platform": "platform",
+            "deployment" : 5
+        }
+    },
+    {
+        "name": "instrument_ctd",
+        "type": "i4",
+        "attrs": {
+            "serial_number": "9363",
+            "make_model": "Sea-Bird GPCTD",
+            "comment": "Slocum Glider cp_379",
+            "long_name": "Pumped Conductivity, Temperature, Depth (CTD) Sensor",
+            "calibration_date": "2016-04-06",
+            "user_calibrated": "",
+            "factory_calibrated": "2016-04-06",
+            "calibration_report": "",
+            "type": "instrument",
+            "platform": "platform",
+            "deployment" : 5
+        }
+    },
+    {
+        "name": "instrument_ctd",
+        "type": "i4",
+        "attrs": {
+            "serial_number": "9055",
+            "make_model": "Sea-Bird GPCTD",
+            "comment": "Slocum Glider cp_376",
+            "long_name": "Pumped Conductivity, Temperature, Depth (CTD) Sensor",
+            "calibration_date": "2016-11-25",
+            "user_calibrated": "",
+            "factory_calibrated": "2016-11-25",
+            "calibration_report": "",
+            "type": "instrument",
+            "platform": "platform",
+            "deployment" : 6
+        }
+    },
+    {
+        "name": "instrument_ctd",
+        "type": "i4",
+        "attrs": {
+            "serial_number": "9361",
+            "make_model": "Sea-Bird GPCTD",
+            "comment": "Slocum Glider cp_374",
+            "long_name": "Pumped Conductivity, Temperature, Depth (CTD) Sensor",
+            "calibration_date": "2016-04-01",
+            "user_calibrated": "",
+            "factory_calibrated": "2016-04-01",
+            "calibration_report": "",
+            "type": "instrument",
+            "platform": "platform",
+            "deployment" : 5
+        }
+    },
+    {
+        "name": "instrument_ctd",
+        "type": "i4",
+        "attrs": {
+            "serial_number": "9037",
+            "make_model": "Sea-Bird GPCTD",
+            "comment": "Slocum Glider cp_340",
+            "long_name": "Pumped Conductivity, Temperature, Depth (CTD) Sensor",
+            "calibration_date": "2012-11-12",
+            "user_calibrated": "",
+            "factory_calibrated": "2012-11-12",
+            "calibration_report": "",
+            "type": "instrument",
+            "platform": "platform",
+            "deployment" : 7
         }
     },
     {
