@@ -85,7 +85,7 @@ env | grep PYTHONPATH;
 
 for d in $deployment_dirs
 do
-    echo "Updating deployment: $d";
+    echo "Deployment: $d";
     # Process all deployments and send new data requests if needed
     if [ -n "$DEBUG" ]
     then

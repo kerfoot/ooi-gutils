@@ -87,7 +87,16 @@ workon gutils;
 # Process all deployments and send new data requests if needed
 for d in $deployment_dirs
 do
-    echo "Deployment $d";
+
+    # Skip if recovered.txt file is present
+    recovered_file="${d}/status/recovered.txt";
+    if [ -f "$recovered_file" ]
+    then
+        echo "Deployment $d has been recovered";
+        continue;
+    fi
+
+    echo "Processing deployment $d";
 
     # Find all UFrame NetCDFs to be processed
     nc_dir="${d}/nc-source";
