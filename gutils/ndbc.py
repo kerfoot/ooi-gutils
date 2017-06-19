@@ -20,3 +20,8 @@ def check_gts_bin_count(max_depth, bin_count):
         return False
         
     return True
+    
+def calculate_profile_resolution(min_depth, max_depth, num_records):
+    
+    return (max_depth - min_depth)/num_records
+    
