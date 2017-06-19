@@ -5,7 +5,6 @@ import logging
 import argparse
 import sys
 from ooidac import write_dataset_status_file
-from gutils.ndbc import check_gts_bin_count
 
 def main(args):
     """Write the profile status file summarizing all DAC NetCDF files written for
@@ -25,6 +24,7 @@ def main(args):
         logging.info('Skipping deployment: {:s} has been recovered'.format(args.glider_deployment_path))
         return 0
         
+    logging.info('Writing {:s} deployment status'.format(args.glider_deployment_path))
     profile_status_file = write_dataset_status_file(args.glider_deployment_path, clobber=args.clobber)
     
     if not profile_status_file:
