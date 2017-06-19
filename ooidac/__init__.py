@@ -7,7 +7,7 @@ import datetime
 from netCDF4 import Dataset
 from dateutil import parser
 import numpy as np
-from gutils.ndbc import check_gts_bin_count
+from gutils.ndbc import check_gts_bin_count, calculate_profile_resolution
 
 logger = logging.getLogger(os.path.basename(__file__))
 
@@ -50,6 +50,7 @@ GLIDER_INSTRUMENT_STREAMS = {
     }
 }
 
+NDBC_REQUIRED_RESOLUTION_METERS = 10
     
 def build_trajectory_name(glider, deployment_date):
 
@@ -86,7 +87,7 @@ def write_dataset_status_file(deployment_path, clobber=False, destination=None):
     try:
         with open(deployment_cfg, 'r') as fid:
             cfg = json.load(fid)
-    except OSError as e:
+    except (ValueError, OSError) as e:
         logger.error('Error reading deployment configuration {:s} ({:s})'.format(deployment_cfg, e))
         return
         
@@ -153,17 +154,28 @@ def write_dataset_status_file(deployment_path, clobber=False, destination=None):
                     
                 # Create the depth time-series, store the min depth, max depth and
                 # number of non-Nan records
-                yo = np.column_stack((nci.variables['time'], nci.variables['depth']))
-                yo = yo[np.all(~np.isnan(yo),axis=1)]
-                num_records = len(yo)
+                #yo = np.column_stack((nci.variables['time'], nci.variables['depth']))
+                #yo = yo[np.all(~np.isnan(yo),axis=1)]
+                depths = nci.variables['depth'][:]
+                num_records = len(depths)
+                #num_records = len(yo)
                 if num_records == 0:
                     logger.warning('Profile has 0 non-NaN time/depth records {:s}'.format(nc_file))
                     min_depth = None
                     max_depth = None
                 else:
-                    min_depth = np.min(yo[:,1])
-                    max_depth = np.max(yo[:,1])
+                    #min_depth = yo[:,1].min()
+                    #max_depth = yo[:,1].max()
+                    good_depths = np.argwhere(depths)
+                    min_depth = np.min(depths[good_depths])
+                    max_depth = np.max(depths[good_depths])
                     
+                #logger.info('checking profile')
+                # Calculate profile average resolution
+                profile_resolution = calculate_profile_resolution(min_depth, max_depth, num_records)
+                ndbc_resolution_status = False
+                if profile_resolution <= NDBC_REQUIRED_RESOLUTION_METERS:
+                    ndbc_resolution_status = True
                 profile = {'profile_id' : np.asscalar(nci.variables['profile_id'][-1]),
                     'profile_time' : profile_time,
                     'profile_time_str' : profile_time_dt.strftime('%Y-%m-%dT%H:%M:%S'),
@@ -173,7 +185,9 @@ def write_dataset_status_file(deployment_path, clobber=False, destination=None):
                     'min_depth' : min_depth,
                     'max_depth' : max_depth,
                     'num_records' : num_records,
-                    'ndbc_status' : check_gts_bin_count(max_depth, num_records)}
+                    'ndbc_status' : check_gts_bin_count(max_depth, num_records),
+                    'ndbc_resolution_status' : ndbc_resolution_status,
+                    'average_profile_resolution_meters' : profile_resolution}
                 profile_status.append(profile)
         except IOError as e:
             logger.error('Erroring reading {:s} ({:s})'.format(nc_file, e))
