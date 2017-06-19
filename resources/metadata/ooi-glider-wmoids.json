@@ -73,7 +73,7 @@
             "phone": "541-737-0011", 
             "institution": "Oregon State University"
         }, 
-        "glider": "cp_383", 
+        "glider": "ce_383", 
         "wmo_id": 4801961,
         "assigned_date" : "2017-04-20"
     },
@@ -86,7 +86,7 @@
             "phone": "541-737-0011", 
             "institution": "Oregon State University"
         }, 
-        "glider": "cp_381", 
+        "glider": "ce_381", 
         "wmo_id": 4801960,
         "assigned_date" : "2017-04-20"
     },
@@ -99,9 +99,22 @@
             "phone": "541-737-0011", 
             "institution": "Oregon State University"
         }, 
-        "glider": "cp_382", 
+        "glider": "ce_382", 
         "wmo_id": 4801967,
         "assigned_date" : "2017-04-20"
+    },
+    {
+        "platform": "CE05MOAS-GL384", 
+        "poc": {
+            "email": "spearce@coas.oregonstate.edu", 
+            "address": "126 SW McKenzie Avenue, Corvallis, OR, 97333", 
+            "name": "Stuart Pearce", 
+            "phone": "541-737-0011", 
+            "institution": "Oregon State University"
+        }, 
+        "glider": "ce_384", 
+        "wmo_id": 4801975,
+        "assigned_date" : "2017-06-05"
     },
     {
         "platform": "CE05MOAS-GL247", 
@@ -112,7 +125,7 @@
             "phone": "541-737-0011", 
             "institution": "Oregon State University"
         }, 
-        "glider": "cp_247", 
+        "glider": "ce_247", 
         "wmo_id": 4801962,
         "assigned_date" : "2017-04-20"
     },
@@ -125,7 +138,7 @@
             "phone": "541-737-0011", 
             "institution": "Oregon State University"
         }, 
-        "glider": "cp_311", 
+        "glider": "ce_311", 
         "wmo_id": 4801963,
         "assigned_date" : "2017-04-20"
     },
@@ -138,7 +151,7 @@
             "phone": "541-737-0011", 
             "institution": "Oregon State University"
         }, 
-        "glider": "cp_312", 
+        "glider": "ce_312", 
         "wmo_id": 4801964,
         "assigned_date" : "2017-04-20"
     },
@@ -151,7 +164,7 @@
             "phone": "541-737-0011", 
             "institution": "Oregon State University"
         }, 
-        "glider": "cp_319", 
+        "glider": "ce_319", 
         "wmo_id": 4801965,
         "assigned_date" : "2017-04-20"
     },
@@ -164,7 +177,7 @@
             "phone": "541-737-0011", 
             "institution": "Oregon State University"
         }, 
-        "glider": "cp_320", 
+        "glider": "ce_320", 
         "wmo_id": 4801966,
         "assigned_date" : "2017-04-20"
     }
