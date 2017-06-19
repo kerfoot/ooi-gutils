@@ -20,11 +20,6 @@
             "accuracy": "1 second",
             "precision": "1 second",
             "resolution": "1 second"
-        },
-        "status_flag": {
-            "attrs": {
-                "long_name": "time Quality Flag"
-            }
         }
     },
     "platform": {
@@ -60,11 +55,6 @@
             "platform": "platform",
             "standard_name": "time",
             "units": "seconds since 1970-01-01T00:00:00Z"
-        },
-        "status_flag": {
-            "attrs": {
-                "long_name": "profile_time Quality Flag"
-            }
         }
     },
     "profile_lat": {
@@ -81,11 +71,6 @@
             "units": "degrees_north",
             "valid_max": 90,
             "valid_min": -90
-        },
-        "status_flag": {
-            "attrs": {
-                "long_name": "profile_lat Quality Flag"
-            }
         }
     },
     "profile_lon": {
@@ -102,11 +87,6 @@
             "units": "degrees_east",
             "valid_max": 180,
             "valid_min": -180
-        },
-        "status_flag": {
-            "attrs": {
-                "long_name": "profile_lon Quality Flag"
-            }
         }
     },
     "eos80_depth": {
@@ -132,11 +112,6 @@
             "instrument": "instrument_ctd",
             "sensor_name": " ",
             "comment": " "
-        },
-        "status_flag": {
-            "attrs": {
-                "long_name": "depth Quality Flag"
-            }
         }
     },
     "lat": {
@@ -205,14 +180,9 @@
             "sensor_name": " ",
             "comment": " ",
             "coordinates" : "time lat lon depth"
-        },
-        "status_flag": {
-            "attrs": {
-                "long_name": "temperature Quality Flag"
-            }
         }
     },
-    "sci_water_pracsal": {
+    "practical_salinity": {
         "name": "salinity",
         "type": "f8",
         "dimension": "time",
@@ -232,11 +202,6 @@
             "precision": " ",
             "resolution": " ",
             "sensor_name": " "
-        },
-        "status_flag": {
-            "attrs": {
-                "long_name": "salinity Quality Flag"
-            }
         }
     },
     "sci_seawater_density": {
@@ -259,11 +224,6 @@
             "resolution": " ",
             "sensor_name": " ",
             "coordinates" : "time lat lon depth"
-        },
-        "status_flag": {
-            "attrs": {
-                "long_name": "density Quality Flag"
-            }
         }
     },
     "sci_water_cond": {
@@ -286,11 +246,6 @@
             "resolution": " ",
             "sensor_name": " ",
             "coordinates" : "time lat lon depth"
-        },
-        "status_flag": {
-            "attrs": {
-                "long_name": "conductivity Quality Flag"
-            }
         }
     },
     "sci_water_pressure_dbar": {
@@ -315,11 +270,6 @@
             "precision": " ",
             "resolution": " ",
             "sensor_name": " "
-        },
-        "status_flag": {
-            "attrs": {
-                "long_name": "pressure Quality Flag"
-            }
         }
     },
     "time_uv": {
@@ -337,11 +287,6 @@
             "valid_max": 0,
             "valid_min": 2147483647,
             "calendar": "gregorian"
-        },
-        "status_flag": {
-            "attrs": {
-                "long_name": "time_uv Quality Flag"
-            }
         }
     },
     "lat_uv": {
@@ -358,11 +303,6 @@
             "units": "degrees_north",
             "valid_max": 90,
             "valid_min": -90
-        },
-        "status_flag": {
-            "attrs": {
-                "long_name": "lat_uv Quality Flag"
-            }
         }
     },
     "lon_uv": {
@@ -379,11 +319,6 @@
             "units": "degrees_east",
             "valid_max": 180,
             "valid_min": -180
-        },
-        "status_flag": {
-            "attrs": {
-                "long_name": "profile_lon Quality Flag"
-            }
         }
     },
     "m_water_vy": {
@@ -405,11 +340,6 @@
             "precision": " ",
             "resolution": " ",
             "comment": ""
-        },
-        "status_flag": {
-            "attrs": {
-                "long_name" : "northward_sea_water_velocity Quality Flag"
-            }
         }
     },
     "m_water_vx": {
@@ -431,11 +361,6 @@
             "precision": " ",
             "resolution": " ",
             "comment": ""
-        },
-        "status_flag": {
-            "attrs": {
-                "long_name" : "eastward_sea_water_velocity Quality Flag"
-            }
         }
     }
 }
