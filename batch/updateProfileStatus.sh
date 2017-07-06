@@ -28,12 +28,15 @@ SYNOPSIS
 DESCRIPTION
     -h
         show help message
+
+    -c
+        clobber and rewrite all profile status JSON files
 ";
 
 # Default values for options
 
 # Process options
-while getopts "hx" option
+while getopts "hxc" option
 do
     case "$option" in
         "h")
@@ -42,6 +45,9 @@ do
             ;;
         "x")
             DEBUG=1;
+            ;;
+        "c")
+            clobber=1;
             ;;
         "?")
             echo -e "$USAGE" >&2;
@@ -91,7 +97,12 @@ do
     then
         write_deployment_profile_status.py -l debug $d;
     else
-        write_deployment_profile_status.py $d;
+        if [ -z "$clobber" ]
+        then
+            write_deployment_profile_status.py $d;
+        else
+            write_deployment_profile_status.py -c $d;
+        fi
     fi
 done
 
